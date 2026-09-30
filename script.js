@@ -1,37 +1,50 @@
+document.documentElement.classList.add("js");
+
 const toggle = document.querySelector(".nav-toggle");
-const links = document.querySelector(".nav-links");
+const navigation = document.querySelector(".section-nav");
 
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", (event) => {
-    const target = document.querySelector(anchor.getAttribute("href"));
+function closeNavigation() {
+  navigation.classList.remove("open");
+  toggle.setAttribute("aria-expanded", "false");
+  toggle.querySelector("span").textContent = "+";
+}
 
-    if (!target) {
-      return;
-    }
-
-    event.preventDefault();
-    target.scrollIntoView({ behavior: "smooth" });
-
-    try {
-      history.replaceState(null, "", window.location.pathname + window.location.search);
-    } catch {
-      // Some local file previews restrict URL cleanup.
-    }
-  });
-});
-
-if (toggle && links) {
+if (toggle && navigation) {
   toggle.addEventListener("click", () => {
-    const isOpen = links.classList.toggle("open");
-    toggle.setAttribute("aria-expanded", String(isOpen));
+    const open = navigation.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.querySelector("span").textContent = open ? "−" : "+";
   });
-
-  links.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      links.classList.remove("open");
-      toggle.setAttribute("aria-expanded", "false");
-    });
+  navigation.addEventListener("click", (event) => {
+    if (event.target.closest("a")) closeNavigation();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && navigation.classList.contains("open")) {
+      closeNavigation();
+      toggle.focus();
+    }
   });
 }
 
-document.getElementById("year").textContent = new Date().getFullYear();
+// Native anchor links retain shareable section URLs and keyboard behavior.
+if (navigation && "IntersectionObserver" in window) {
+  const sectionLinks = [...navigation.querySelectorAll("a")];
+  const sections = [...document.querySelectorAll("main > section[id]")];
+  const visibleSections = new Set();
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) visibleSections.add(entry.target.id);
+      else visibleSections.delete(entry.target.id);
+    });
+    const current = [...sections].reverse().find((section) => visibleSections.has(section.id));
+    if (!current) return;
+    sectionLinks.forEach((link) => {
+      if (link.hash === `#${current.id}`) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }, { rootMargin: "-8% 0px -65% 0px" });
+  sections.forEach((section) => observer.observe(section));
+}
+
+const year = document.getElementById("year");
+if (year) year.textContent = new Date().getFullYear();

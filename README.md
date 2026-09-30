@@ -1,44 +1,32 @@
-# Weijia Wang CV Website
+# Weijia Wang - Academic Website
 
-This is a lightweight static CV website for Weijia (Allen) Wang.
+Personal academic website: https://wweijia0107.github.io/
 
-## Files
+Plain HTML, CSS, and JavaScript. No framework, build step, external fonts, or analytics.
+GitHub Pages publishes the `main` branch from the repository root.
 
-- `index.html` — main website content
-- `styles.css` — responsive visual styling
-- `script.js` — mobile navigation toggle and dynamic year
-- `CV-Weijia_Wang.pdf` — downloadable CV PDF used by the website
+## Content
 
-## Before publishing
+- `index.html`: profile, research, publications, experience, academic service, education, and projects.
+- `styles.css`: responsive layout, accessible focus states, reduced-motion support, and print styles.
+- `script.js`: mobile section navigation and active-section indicator; the content works without JavaScript.
+- `publications.bib`: downloadable publication citation, checked against the CVF proceedings.
+- `CV-Weijia_Wang.pdf`: current downloadable CV.
+- `scripts/build_cv.py`: CV source, using ReportLab (`python -m pip install reportlab`).
 
-Review `index.html` if you want to add optional Google Scholar, GitHub, LinkedIn, code, or slide links later.
+## Preview
 
-## Deployment options
-
-### GitHub Pages
-
-1. Create a new GitHub repository, for example `weijiawang.github.io` or `cv-website`.
-2. Upload all files in this folder.
-3. Go to **Settings → Pages**.
-4. Set the source to the main branch and root folder.
-5. Wait for GitHub Pages to publish the site.
-
-### Netlify
-
-1. Go to Netlify.
-2. Drag and drop this folder.
-3. Netlify will publish the website automatically.
-
-### Local preview
-
-Double-click `index.html`, or run a simple local server:
-
-```bash
-python -m http.server 8000
+```sh
+python -m http.server 8000 --bind 127.0.0.1
 ```
 
-Then open:
+Open http://127.0.0.1:8000/ and check the desktop and mobile layouts.
 
-```text
-http://localhost:8000
-```
+## Update
+
+Edit the relevant entries in `index.html` and update its `<time>` element.
+Update `scripts/build_cv.py` and run it from the repository root to regenerate the CV.
+Preserve exact publication titles and distinguish workshop service from main-conference service.
+The SDL role describes participation in the internship program, including the current proposal stage.
+
+Changes pushed to `main` are published by GitHub Pages. Review the live website after the Pages build completes.
