@@ -1,32 +1,28 @@
-# Weijia Wang - Academic Website
+# Weijia Wang – Academic Website
 
 Personal academic website: https://wweijia0107.github.io/
 
-Plain HTML, CSS, and JavaScript. No framework, build step, external fonts, or analytics.
-GitHub Pages publishes the `main` branch from the repository root.
+Static HTML/CSS/JavaScript, ready for GitHub Pages. Updated November 23, 2026.
 
 ## Content
 
-- `index.html`: profile, research, publications, experience, academic service, education, and projects.
-- `styles.css`: responsive layout, accessible focus states, reduced-motion support, and print styles.
-- `script.js`: mobile section navigation and active-section indicator; the content works without JavaScript.
-- `publications.bib`: downloadable publication citation, checked against the CVF proceedings.
-- `CV-Weijia_Wang.pdf`: current downloadable CV.
-- `scripts/build_cv.py`: CV source, using ReportLab (`python -m pip install reportlab`).
+- `index.html`: research, publication, accepted AGU/AAG presentations, awards, service, education, and experience.
+- `styles.css` and `script.js`: responsive visual style and accessible mobile menu.
+- `publications.bib`: WACV 2026 workshop paper, including DOI and official open-access link.
+- `CV-Weijia_Wang.pdf`: downloadable two-page academic CV.
+- `scripts/build_cv.py`: reproducible ReportLab PDF source; requires `reportlab`.
 
-## Preview
+## Deploy
 
-```sh
-python -m http.server 8000 --bind 127.0.0.1
-```
+Upload the **contents** of this folder to the root of the `main` branch of the `wweijia0107/wweijia0107.github.io` repository, replacing files with the same names. Keep Pages configured to deploy from `main` / `(root)`.
 
-Open http://127.0.0.1:8000/ and check the desktop and mobile layouts.
+Because this is a newly generated deployment bundle based on the existing site's visible structure and design, inspect the `index.html` diff before upload to confirm that any customizations made to the live repository after September 30 are retained.
 
-## Update
+Run locally using `python -m http.server 8000` and open `http://127.0.0.1:8000/`.
 
-Edit the relevant entries in `index.html` and update its `<time>` element.
-Update `scripts/build_cv.py` and run it from the repository root to regenerate the CV.
-Preserve exact publication titles and distinguish workshop service from main-conference service.
-The SDL role describes participation in the internship program, including the current proposal stage.
+## Editorial accuracy
 
-Changes pushed to `main` are published by GitHub Pages. Review the live website after the Pages build completes.
+- WACV 2026 is a peer-reviewed **workshop paper**, not a main-conference paper.
+- Harvard CGA award is a workshop travel grant, with no unverified amount claimed.
+- AGU 2026 and AAG 2027 are accepted/upcoming presentations as of November 23, 2026.
+- The survey's university ethics review was an **exempt determination** (August 2026), not publication of results.
